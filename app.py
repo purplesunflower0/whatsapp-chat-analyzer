@@ -5,9 +5,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-st.sidebar.title("WhatsApp Chat Analyzer")
+st.title("WhatsApp Chat Analyzer")
 
-uploaded_file = st.sidebar.file_uploader("Choose a file")
+uploaded_file = st.file_uploader("Choose a file")
 if uploaded_file is not None:
     bytes_data = uploaded_file.getvalue()
     data = bytes_data.decode("utf-8")
@@ -22,8 +22,8 @@ if uploaded_file is not None:
     user_list.remove('group_notification')
     user_list.sort(reverse=True)
     user_list.insert(0,'Overall')
-    selected_user = st.sidebar.selectbox("Select User", user_list)
-    if st.sidebar.button("Show Analysis"):
+    selected_user = st.selectbox("Select User", user_list)
+    if st.button("Show Analysis"):
         
         num_messages, words, num_media_messages, num_links = helper.fetch_stats(selected_user, df)
         
@@ -125,4 +125,5 @@ if uploaded_file is not None:
             fig,ax = plt.subplots()
             ax.pie(emoji_df[1].head(),labels=emoji_df[0].head(),autopct="%0.2f")
             st.pyplot(fig)
+
            
